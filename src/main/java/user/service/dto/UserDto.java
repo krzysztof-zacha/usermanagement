@@ -1,10 +1,12 @@
 package user.service.dto;
 
+import com.sun.istack.internal.Nullable;
 import user.common.RoleEnum;
 
 import java.time.LocalDate;
 
 public class UserDto {
+    @Nullable
     private Long id;
     private String userName;
     private String name;
