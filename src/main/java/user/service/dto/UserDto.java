@@ -1,13 +1,11 @@
 package user.service.dto;
 
-import com.sun.istack.internal.Nullable;
 import user.common.RoleEnum;
 
 import java.time.LocalDate;
 
 public class UserDto {
-    @Nullable
-    private Long id;
+    private String id;
     private String username;
     private String surname;
     private String name;
@@ -73,12 +71,11 @@ public class UserDto {
         this.surname = surname;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
-
 }

@@ -7,6 +7,7 @@ import user.repository.UserEntity;
 import user.repository.UserRepository;
 import user.service.dto.UserDto;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +23,9 @@ public class UserService {
 
     public void addUser(UserDto user) {
         UserEntity userEntity = modelMapper.map(user, UserEntity.class);
+        if (userEntity.getRegistrationDate() == null) {
+            userEntity.setRegistrationDate(LocalDate.now());
+        }
         userRepository.save(userEntity);
     }
 
@@ -31,9 +35,9 @@ public class UserService {
         return result;
     }
 
-    public void removeUser(Long id) {
+    public void removeUser(String id) {
         if (userRepository.count() > 1) {
-            userRepository.delete(id);
+            userRepository.delete(Long.parseLong(id));
         }
     }
 }
