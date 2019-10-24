@@ -18,12 +18,12 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public void addUser(UserDto user) {
+    public void addUser(@RequestBody UserDto user) {
         this.userService.addUser(user);
     }
 
     @PutMapping("/user")
-    public void updateUser(UserDto user) {
+    public void updateUser(@RequestBody UserDto user) {
         this.userService.addUser(user);
     }
 
