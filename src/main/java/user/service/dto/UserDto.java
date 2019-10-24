@@ -8,16 +8,14 @@ import java.time.LocalDate;
 public class UserDto {
     @Nullable
     private Long id;
-    private String userName;
+    private String username;
+    private String surname;
     private String name;
     private String email;
     private RoleEnum role;
     private LocalDate registrationDate;
     private boolean enabled;
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public String getName() {
         return name;
@@ -59,8 +57,20 @@ public class UserDto {
         this.enabled = enabled;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public Long getId() {

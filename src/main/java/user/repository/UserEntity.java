@@ -12,8 +12,9 @@ public class UserEntity {
     @Id
     private Long id;
 
-    private String userName;
+    private String username;
     private String name;
+    private String surname;
     private String email;
     private RoleEnum role;
     private LocalDate registrationDate;
@@ -25,14 +26,6 @@ public class UserEntity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getName() {
@@ -73,5 +66,21 @@ public class UserEntity {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 }

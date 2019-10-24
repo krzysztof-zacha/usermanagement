@@ -27,8 +27,8 @@ public class UserController {
         this.userService.addUser(user);
     }
 
-    @DeleteMapping("/user")
-    public void removeUser(Long id) {
+    @DeleteMapping("/user/{id}")
+    public void removeUser(@PathVariable Long id) {
         this.userService.removeUser(id);
     }
 
