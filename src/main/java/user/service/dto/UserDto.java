@@ -2,18 +2,28 @@ package user.service.dto;
 
 import user.common.RoleEnum;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class UserDto {
     private String id;
+
+    @Size(max = 30)
     private String username;
+
+    @Size(max = 30)
     private String surname;
+
+    @Size(max = 30)
     private String name;
+
+    @Size(max = 30)
+    @Pattern(regexp = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", message = "Invalid format")
     private String email;
     private RoleEnum role;
     private LocalDate registrationDate;
     private boolean enabled;
-
 
     public String getName() {
         return name;

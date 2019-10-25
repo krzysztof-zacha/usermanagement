@@ -38,7 +38,7 @@ public class UserServiceTest {
         userDto.setUsername("username");
         // when
 
-        userService.addUser(userDto);
+        userService.saveOrUpdate(userDto);
 
         // then
         verify(userRepository, times(1)).save(any(UserEntity.class));

@@ -7,6 +7,10 @@ import user.repository.UserEntity;
 import user.repository.UserRepository;
 import user.service.dto.UserDto;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +27,9 @@ public class UserService {
         this.modelMapper = modelMapper;
     }
 
-    public void addUser(UserDto user) {
+    public void saveOrUpdate(UserDto user) {
+        validate(user);
+
         UserEntity userEntity = modelMapper.map(user, UserEntity.class);
         if (userEntity.getRegistrationDate() == null) {
             userEntity.setRegistrationDate(LocalDate.now());
@@ -40,6 +46,15 @@ public class UserService {
     public void removeUser(String id) {
         if (userRepository.count() > 1) {
             userRepository.delete(Long.parseLong(id));
+        }
+    }
+
+    private void validate(UserDto user) {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<UserDto>> constraintViolations = validator.validate(user);
+        if (!constraintViolations.isEmpty()) {
+            throw new IllegalArgumentException("User was not validated properly");
         }
     }
 }

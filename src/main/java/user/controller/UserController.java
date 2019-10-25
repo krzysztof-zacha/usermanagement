@@ -19,12 +19,12 @@ public class UserController {
 
     @PostMapping("/user")
     public void addUser(@RequestBody UserDto user) {
-        this.userService.addUser(user);
+        this.userService.saveOrUpdate(user);
     }
 
     @PutMapping("/user")
     public void updateUser(@RequestBody UserDto user) {
-        this.userService.addUser(user);
+        this.userService.saveOrUpdate(user);
     }
 
     @DeleteMapping("/user/{id}")
