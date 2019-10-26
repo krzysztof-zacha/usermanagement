@@ -11,7 +11,10 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 public class RedisConfiguration {
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
-        return new JedisConnectionFactory();
+        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
+        jedisConnectionFactory.setHostName(System.getenv("REDIS_HOST"));
+        jedisConnectionFactory.setPort(Integer.parseInt(System.getenv("REDIS_PORT")));
+        return jedisConnectionFactory;
     }
 
 
