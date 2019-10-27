@@ -5,19 +5,27 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
+import redis.clients.jedis.Protocol;
+
+import java.net.URI;
 
 @Configuration
 @EnableRedisRepositories
 public class RedisConfiguration {
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
-        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
-        String[] split = System.getenv("REDIS_URL").split(":");
-        String host = split[0];
-        String port = split[1];
-        jedisConnectionFactory.setHostName(host);
-        jedisConnectionFactory.setPort(Integer.parseInt(port));
-        return jedisConnectionFactory;
+        String redisUrl = System.getenv("REDIS_URL");
+        URI redisUri = URI.create(redisUrl);
+
+        JedisConnectionFactory jedisConnFactory = new JedisConnectionFactory();
+
+        jedisConnFactory.setUsePool(true);
+        jedisConnFactory.setHostName(redisUri.getHost());
+        jedisConnFactory.setPort(redisUri.getPort());
+        jedisConnFactory.setTimeout(Protocol.DEFAULT_TIMEOUT);
+        jedisConnFactory.setPassword(redisUri.getUserInfo().split(":", 2)[1]);
+
+        return jedisConnFactory;
     }
 
 
