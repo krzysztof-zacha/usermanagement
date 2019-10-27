@@ -12,8 +12,11 @@ public class RedisConfiguration {
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
         JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
-        jedisConnectionFactory.setHostName(System.getenv("REDIS_HOST"));
-        jedisConnectionFactory.setPort(Integer.parseInt(System.getenv("REDIS_PORT")));
+        String[] split = System.getenv("REDIS_URL").split(":");
+        String host = split[0];
+        String port = split[1];
+        jedisConnectionFactory.setHostName(host);
+        jedisConnectionFactory.setPort(Integer.parseInt(port));
         return jedisConnectionFactory;
     }
 
